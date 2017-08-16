@@ -1,5 +1,3 @@
-require 'awesome_print'
-
 class String
   def underscore
     self.gsub(/::/, '/').
@@ -47,8 +45,8 @@ class SchemaNode
   end
 
   def display
-    ap @name
-    ap @attrs
+    puts @name
+    puts @attrs
   end
 end
 
