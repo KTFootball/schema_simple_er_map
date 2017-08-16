@@ -74,6 +74,7 @@ class SchemaGenerator
       @nodes.each do |node|
         writeable.write node.to_struct
       end
+      
       @nodes.combination(2).to_a.each do |node_a, node_b|
         link = Link.new(node_a, node_b)
         @h["#{node_a.name}_#{node_b.name}"] = link.link?
