@@ -106,4 +106,4 @@ sg.draw
 
 You will get a dot file and a png file.
 
-![test.dot.png](https://github.com/KTFootball/schema_simple_er_map/blob/master/test.dot.png "test.dot.png")
+![example.dot.png](https://github.com/KTFootball/schema_simple_er_map/blob/master/example.dot.png "example.dot.png")
