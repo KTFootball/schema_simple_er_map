@@ -71,26 +71,19 @@ class SchemaGenerator
       writeable.write("node [shape=record,color=Red,fontname=Courier];\n")
       writeable.write("edge [color=Blue]\n")
 
-      draw_node writeable
-      draw_edge writeable
+      @nodes.each do |node|
+        writeable.write node.to_struct
+      end
+      @nodes.combination(2).to_a.each do |node_a, node_b|
+        link = Link.new(node_a, node_b)
+        @h["#{node_a.name}_#{node_b.name}"] = link.link?
+      end
+      
+      @h.select {|k,v|v == true}.each do |k,v|
+        writeable.write "#{k.split('_')[0]} -> #{k.split('_')[1]} [dir=\"none\"]\n"
+      end
 
       writeable.write("}\n")
-    end
-  end
-
-  private
-  def draw_node(writeable)
-    @nodes.each do |node|
-      writeable.write node.to_struct
-    end
-  end
-
-  def draw_edge(writeable)
-    @nodes.combination(2).to_a.each do |node_a, node_b|
-      link = Link.new(node_a, node_b)
-      @h["#{node_a.name}_#{node_b.name}"] = link.link?
-    end.select {|k,v|v == true}.each do |k,v| 
-      writeable.write "#{k.split('_')[0]} -> #{k.split('_')[1]} [dir=\"none\"]\n"
     end
   end
 end
